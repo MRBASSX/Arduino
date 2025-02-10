@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../Desktop/Arduino Micro"
+		},
+		{
+			"name": "Detector",
+			"path": ".."
+		},
+		{
+			"name": "man",
+			"path": "../../man"
+		}
+	],
+	"settings": {}
+}
