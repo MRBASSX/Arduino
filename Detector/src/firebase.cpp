@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-class fire
+class FireTransmision
 
 {
 
