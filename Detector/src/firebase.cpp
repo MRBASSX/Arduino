@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-class brand
+class fire
 {
 private:
     
