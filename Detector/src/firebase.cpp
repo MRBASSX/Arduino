@@ -6,6 +6,7 @@ class fire
 
 private:
 
+
     
 public:
 
