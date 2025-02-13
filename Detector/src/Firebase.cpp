@@ -3,7 +3,7 @@
 #include "WiFi.h"
 #include <Firebase_ESP_Client.h>
 
-class FireTransmision
+class Firebase
 
 {
 
