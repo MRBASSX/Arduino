@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WebServer.h>
-#include <Firebase.h>
+
 
 /* Put your SSID & Password */
 const char* ssid = "ESP32";  // Enter SSID here
