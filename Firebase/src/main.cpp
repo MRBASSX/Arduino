@@ -7,9 +7,13 @@
 #include <Firebase.h>
 #include <Firebase_ESP_Client.h>
 
-/* Put your SSID & Password */
-const char* ssid = "ESP32";  // Enter SSID here
-const char* password = "123456789";  //Enter Password here
+// Station Mode Credentials
+const char* sta_ssid = ".";
+const char* sta_password = "Sooner419abasss@";
+
+// AP Mode Credentials
+const char* ap_ssid = "ESP32_AP";
+const char* ap_password = "12345678";
 
 /* Put IP Address details */
 IPAddress local_ip(192,168,1,1);
@@ -63,10 +67,10 @@ bool LED2status = LOW;
    Serial.begin(115200);
    pinMode(LED1pin, OUTPUT);
    pinMode(LED2pin, OUTPUT);
-   WiFi.softAP(ssid, password);
+   WiFi.softAP(ap_ssid, ap_password);
    WiFi.softAPConfig(local_ip, gateway, subnet);
-   WiFi.begin(ssid, password);
- 
+   WiFi.begin(sta_ssid, sta_password);
+   delay(300);
 
    Serial.print("Connecting to Wi-Fi");
    unsigned long ms = millis();
@@ -152,17 +156,17 @@ bool LED2status = LOW;
      // For the usage of FirebaseJson, see examples/FirebaseJson/BasicUsage/Create_Edit_Parse.ino
      FirebaseJson json;
  
-    //  if (count == 0)
-    //  {
-    //    json.set("value/round/" + String(count), F("cool!"));
-    //    json.set(F("value/ts/.sv"), F("timestamp"));
-    //    Serial.printf("Set json... %s\n", Firebase.RTDB.set(&fbdo, F("/test/json"), &json) ? "ok" : fbdo.errorReason().c_str());
-    //  }
-    //  else
-    //  {
-    //    json.add(String(count), F("smart!"));
-    //    Serial.printf("Update node... %s\n", Firebase.RTDB.updateNode(&fbdo, F("/test/json/value/round"), &json) ? "ok" : fbdo.errorReason().c_str());
-    //  }
+     if (count == 0)
+     {
+       json.set("value/round/" + String(count), F("cool!"));
+       json.set(F("value/ts/.sv"), F("timestamp"));
+       Serial.printf("Set json... %s\n", Firebase.RTDB.set(&fbdo, F("/test/json"), &json) ? "ok" : fbdo.errorReason().c_str());
+     }
+     else
+     {
+       json.add(String(count), F("smart!"));
+       Serial.printf("Update node... %s\n", Firebase.RTDB.updateNode(&fbdo, F("/test/json/value/round"), &json) ? "ok" : fbdo.errorReason().c_str());
+     }
  
      Serial.println();
 
