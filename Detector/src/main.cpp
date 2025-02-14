@@ -119,6 +119,7 @@ void setup() {
 
   WiFi.softAP(ssid, password);
   WiFi.softAPConfig(local_ip, gateway, subnet);
+  // WiFi.begin(ssid,password);
   delay(100);
 
   Serial.print("Connecting to Wi-Fi");
