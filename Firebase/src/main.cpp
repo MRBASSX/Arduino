@@ -4,7 +4,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WebServer.h>
-#include <Firebase.h>
 #include <Firebase_ESP_Client.h>
 
 // Station Mode Credentials
@@ -50,7 +49,7 @@ bool LED2status = LOW;
  
  /* 4. Define the user Email and password that alreadey registerd or added in your project */
  #define USER_EMAIL "admin@gmail.com"
- #define USER_PASSWORD "admin12345@"
+ #define USER_PASSWORD "admin12345"
  
  // Define Firebase Data object
  FirebaseData fbdo;
