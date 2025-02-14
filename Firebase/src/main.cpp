@@ -52,9 +52,7 @@ bool LED2status = LOW;
  FirebaseData fbdo;
  FirebaseAuth auth;
  FirebaseConfig config;
- 
  unsigned long sendDataPrevMillis = 0;
- 
  unsigned long count = 0;
  
 
@@ -72,11 +70,11 @@ bool LED2status = LOW;
 
    Serial.print("Connecting to Wi-Fi");
    unsigned long ms = millis();
-   while (WiFi.status() != WL_CONNECTED)
-   {
-     Serial.print(".");
-     delay(300);
-   }
+  //  while (WiFi.status() != WL_CONNECTED)
+  //  {
+  //    Serial.print(".");
+  //    delay(300);
+  //  }
    Serial.println();
    Serial.print("Connected with IP: ");
    Serial.println(WiFi.localIP());

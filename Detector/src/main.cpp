@@ -1,12 +1,26 @@
-
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WebServer.h>
-
+#include <Firebase_ESP_Client.h>
+// Provide the token generation process info.
+ #include <addons/TokenHelper.h>
+  // Provide the RTDB payload printing info and other helper functions.
+ #include <addons/RTDBHelper.h>
+  /* 2. Define the API Key */
+ #define API_KEY "AIzaSyCKMN2pLzuy5DBLTXsOjH10kg4hUgWRvpo"
+ /* 3. Define the RTDB URL */
+ #define DATABASE_URL "fir-iot-e9926-default-rtdb.firebaseio.com" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
 
 /* Put your SSID & Password */
 const char* ssid = "ESP32";  // Enter SSID here
 const char* password = "12345678";  //Enter Password here
+
+// Define Firebase Data object
+FirebaseData fbdo;
+FirebaseAuth auth;
+FirebaseConfig config;
+unsigned long sendDataPrevMillis = 0;
+unsigned long count = 0;
 
 /* Put IP Address details */
 IPAddress local_ip(192,168,1,1);
@@ -106,6 +120,15 @@ void setup() {
   WiFi.softAP(ssid, password);
   WiFi.softAPConfig(local_ip, gateway, subnet);
   delay(100);
+
+  Serial.print("Connecting to Wi-Fi");
+  unsigned long ms = millis();
+  Serial.println();
+   Serial.print("Connected with IP: ");
+   Serial.println(WiFi.localIP());
+   Serial.println();
+ 
+   Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
   
   server.on("/", handle_OnConnect);
   server.on("/led1on", handle_led1on);
@@ -117,6 +140,8 @@ void setup() {
   server.begin();
   Serial.println("HTTP server started");
 }
+
+
 void loop() {
   server.handleClient();
   if(LED1status)
