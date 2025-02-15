@@ -74,7 +74,9 @@ String SendHTML(uint8_t led1stat,uint8_t led2stat){
 }
 
 
-void handle_OnConnect() {
+
+
+  void handle_OnConnect() {
   LED1status = LOW;
   LED2status = LOW;
   Serial.println("GPIO4 Status: OFF | GPIO5 Status: OFF");
