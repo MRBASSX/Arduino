@@ -45,6 +45,7 @@ void setup() {
   WiFi.mode(WIFI_AP_STA);  // Enable both AP and Station modes
   WiFi.softAP(ap_ssid, ap_password);  // Start the access point
   WiFi.begin(sta_ssid, sta_password); // Connect to existing network
+  
   server.on("/power", HomePage);
   server.on("/", HomePage);
   server.begin();

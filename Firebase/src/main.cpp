@@ -24,8 +24,8 @@ WebServer server(80);
 uint8_t LED1pin = 2;
 bool LED1status = LOW;
 
-uint8_t LED2pin = 2;
-bool LED2status = LOW;
+// uint8_t LED2pin = 2;
+// bool LED2status = LOW;
  
  // Provide the token generation process info.
  #include <addons/TokenHelper.h>
@@ -65,7 +65,7 @@ bool LED2status = LOW;
   
    Serial.begin(115200);
    pinMode(LED1pin, OUTPUT);
-   pinMode(LED2pin, OUTPUT);
+  //  pinMode(LED2pin, OUTPUT);
    WiFi.softAP(ap_ssid, ap_password);
    WiFi.softAPConfig(local_ip, gateway, subnet);
    WiFi.begin(sta_ssid, sta_password);
@@ -124,52 +124,27 @@ bool LED2status = LOW;
  
    if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0))
    {
+
      sendDataPrevMillis = millis();
  
-     Serial.printf("Set bool... %s\n", Firebase.RTDB.setBool(&fbdo, F("/test/bool"), count % 2 == 0) ? "ok" : fbdo.errorReason().c_str());
- 
-     Serial.printf("Get bool... %s\n", Firebase.RTDB.getBool(&fbdo, FPSTR("/test/bool")) ? fbdo.to<bool>() ? "true" : "false" : fbdo.errorReason().c_str());
- 
-     bool bVal;
-     Serial.printf("Get bool ref... %s\n", Firebase.RTDB.getBool(&fbdo, F("/test/bool"), &bVal) ? bVal ? "true" : "false" : fbdo.errorReason().c_str());
- 
-     Serial.printf("Set int... %s\n", Firebase.RTDB.setInt(&fbdo, F("/test/int"), count) ? "ok" : fbdo.errorReason().c_str());
- 
-     Serial.printf("Get int... %s\n", Firebase.RTDB.getInt(&fbdo, F("/test/int")) ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
- 
-     int iVal = 0;
-     Serial.printf("Get int ref... %s\n", Firebase.RTDB.getInt(&fbdo, F("/test/int"), &iVal) ? String(iVal).c_str() : fbdo.errorReason().c_str());
- 
-     Serial.printf("Set float... %s\n", Firebase.RTDB.setFloat(&fbdo, F("/test/float"), count + 10.2) ? "ok" : fbdo.errorReason().c_str());
- 
-     Serial.printf("Get float... %s\n", Firebase.RTDB.getFloat(&fbdo, F("/test/float")) ? String(fbdo.to<float>()).c_str() : fbdo.errorReason().c_str());
- 
-     Serial.printf("Set double... %s\n", Firebase.RTDB.setDouble(&fbdo, F("/test/double"), count + 35.517549723765) ? "ok" : fbdo.errorReason().c_str());
- 
-     Serial.printf("Get double... %s\n", Firebase.RTDB.getDouble(&fbdo, F("/test/double")) ? String(fbdo.to<double>()).c_str() : fbdo.errorReason().c_str());
- 
-     Serial.printf("Set string... %s\n", Firebase.RTDB.setString(&fbdo, F("/test/string"), F("Hello World!")) ? "ok" : fbdo.errorReason().c_str());
- 
-     Serial.printf("Get string... %s\n", Firebase.RTDB.getString(&fbdo, F("/test/string")) ? fbdo.to<const char *>() : fbdo.errorReason().c_str());
- 
-     // For the usage of FirebaseJson, see examples/FirebaseJson/BasicUsage/Create_Edit_Parse.ino
-     FirebaseJson json;
- 
-     if (count == 0)
-     {
-       json.set("value/round/" + String(count), F("cool!"));
-       json.set(F("value/ts/.sv"), F("timestamp"));
-       Serial.printf("Set json... %s\n", Firebase.RTDB.set(&fbdo, F("/test/json"), &json) ? "ok" : fbdo.errorReason().c_str());
-     }
-     else
-     {
-       json.add(String(count), F("smart!"));
-       Serial.printf("Update node... %s\n", Firebase.RTDB.updateNode(&fbdo, F("/test/json/value/round"), &json) ? "ok" : fbdo.errorReason().c_str());
-     }
- 
-     Serial.println();
-
+     Serial.printf("Set bool... %s\n", Firebase.RTDB.setBool(&fbdo, F("/test/bool"), count % 2 == 0) ? "true" : fbdo.errorReason().c_str());
      count++;
+
+     if(Firebase.RTDB.getBool(&fbdo, FPSTR("/test/bool")) && fbdo.to<bool>()){
+
+      {digitalWrite(LED1pin, HIGH);}
+
+     }else{
+
+
+      {digitalWrite(LED1pin, LOW);}
+
+     }
+    //  Serial.printf("Get bool... %s\n", Firebase.RTDB.getBool(&fbdo, FPSTR("/test/bool")) ? fbdo.to<bool>() ? "true" : "false" : fbdo.errorReason().c_str());
+ 
+    //  bool bVal;
+    //  Serial.printf("Get bool ref... %s\n", Firebase.RTDB.getBool(&fbdo, F("/test/bool"), &bVal) ? bVal ? "true" : "false" : fbdo.errorReason().c_str());
+   
    }
  }
  
