@@ -16,6 +16,13 @@ IPAddress gateway(192,168,1,1);
 IPAddress subnet(255,255,255,0);
 
 WebServer server(80);
+bool is_authenticated() {
+  if (!server.authenticate("admin", "admin")) {
+    server.requestAuthentication();
+    return false;
+  }
+  return true;
+}
 
 String getPage(String content) {
   String html = "<!DOCTYPE html><html><head>";
@@ -51,13 +58,7 @@ void handle_NotFound(){
   server.send(404, "text/plain", "Not found");
 }
 
-bool is_authenticated() {
-  if (!server.authenticate("admin", "admin")) {
-    server.requestAuthentication();
-    return false;
-  }
-  return true;
-}
+
 
 
 
