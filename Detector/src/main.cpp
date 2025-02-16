@@ -11,6 +11,11 @@
  /* 3. Define the RTDB URL */
  #define DATABASE_URL "fir-iot-e9926-default-rtdb.firebaseio.com" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
 
+
+ // Station Mode Credentials
+const char* sta_ssid = ".";
+const char* sta_password = "Sooner419abasss@";
+
 /* Put your SSID & Password */
 const char* ssid = "ESP32";  // Enter SSID here
 const char* password = "12345678";  //Enter Password here
@@ -121,7 +126,7 @@ void setup() {
 
   WiFi.softAP(ssid, password);
   WiFi.softAPConfig(local_ip, gateway, subnet);
-  // WiFi.begin(ssid,password);
+  WiFi.begin(sta_ssid,sta_password);
   delay(100);
 
   Serial.print("Connecting to Wi-Fi");
