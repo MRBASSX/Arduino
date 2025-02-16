@@ -3,15 +3,15 @@
 #include <WebServer.h>
 
 // Station Mode Credentials
-// const char* sta_ssid = ".";
-// const char* sta_password = "Sooner419abasss@";
+const char* sta_ssid = ".";
+const char* sta_password = "Sooner419abasss@";
 
 // AP Mode Credentials
 const char* ap_ssid = "ESP32_AP";
 const char* ap_password = "12345678";
 
 /* Put IP Address details */
-IPAddress local_ip(192,168,1,1);
+IPAddress local_ip(192,168,1,5);
 IPAddress gateway(192,168,1,1);
 IPAddress subnet(255,255,255,0);
 
@@ -64,9 +64,10 @@ void handle_NotFound(){
 
 void setup() {
   // put your setup code here, to run once:
-  // WiFi.mode(WIFI_AP_STA);  // Enable both AP and Station modes
+  WiFi.mode(WIFI_AP_STA);  // Enable both AP and Station modes
   WiFi.softAP(ap_ssid, ap_password);  // Start the access point
-  // WiFi.begin(sta_ssid, sta_password); // Connect to existing network
+  WiFi.softAPConfig(local_ip, gateway, subnet);
+  WiFi.begin(sta_ssid, sta_password); // Connect to existing network
   
   server.on("/power", HomePage);
   server.on("/", HomePage);
