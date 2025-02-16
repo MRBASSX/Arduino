@@ -17,7 +17,7 @@ const char* sta_ssid = ".";
 const char* sta_password = "Sooner419abasss@";
 
 /* Put your SSID & Password */
-const char* ssid = "ESP32";  // Enter SSID here
+const char* ssid = "ESP32-Link";  // Enter SSID here
 const char* password = "12345678";  //Enter Password here
 
 // Define Firebase Data object
@@ -33,6 +33,13 @@ IPAddress gateway(192,168,1,1);
 IPAddress subnet(255,255,255,0);
 
 WebServer server(80);
+bool is_authenticated() {
+  if (!server.authenticate("admin", "admin")) {
+    server.requestAuthentication();
+    return false;
+  }
+  return true;
+}
 
 uint8_t LED1pin = 2;
 bool LED1status = LOW;
@@ -129,6 +136,8 @@ void setup() {
   WiFi.begin(sta_ssid,sta_password);
   delay(100);
 
+
+
   Serial.print("Connecting to Wi-Fi");
   unsigned long ms = millis();
   Serial.println();
@@ -144,14 +153,16 @@ void setup() {
   server.on("/led2on", handle_led2on);
   server.on("/led2off", handle_led2off);
   server.onNotFound(handle_NotFound);
-  
+  is_authenticated();
   server.begin();
   Serial.println("HTTP server started");
 }
 
 
 void loop() {
+
   server.handleClient();
+  
   if(LED1status)
   {digitalWrite(LED1pin, HIGH);}
   else
