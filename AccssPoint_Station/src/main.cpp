@@ -12,7 +12,7 @@ const char* ap_password = "12345678";
 
 /* Put IP Address details */
 IPAddress local_ip(192,168,1,5);
-IPAddress gateway(192,168,1,1);
+IPAddress gateway(192,168,1,5);
 IPAddress subnet(255,255,255,0);
 
 WebServer server(80);
