@@ -16,9 +16,9 @@
 #include "driver/rtc_io.h"
 #include <LittleFS.h>
 #include <FS.h>
-#include <Firebase_ESP_Client.h>
+// #include <Firebase_ESP_Client.h>
 //Provide the token generation process info.
-#include <addons/TokenHelper.h>
+// #include <addons/TokenHelper.h>
 
 //Replace with your network credentials
 const char* ssid = "REPLACE_WITH_YOUR_SSID";
