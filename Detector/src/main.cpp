@@ -2,6 +2,11 @@
 #include <WiFi.h>
 #include <WebServer.h>
 #include <Firebase_ESP_Client.h>
+#include <Bird.h>
+
+Bird *bird  = new Bird(1,2,3,4,5,6,7,8,9);
+
+
 // Provide the token generation process info.
  #include <addons/TokenHelper.h>
   // Provide the RTDB payload printing info and other helper functions.
